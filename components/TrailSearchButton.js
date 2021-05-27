@@ -2,8 +2,10 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 export default function TrailSearchButton(props) {
+  const handlePress = () => props.searchTrails();
+
   return (
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity onPress={handlePress} style={styles.button}>
       <Text style={styles.buttonText}>Search Trails</Text>
     </TouchableOpacity>
   )
