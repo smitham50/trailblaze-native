@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, SafeAreaView, ActivityIndicator } from 'react-native';
 import * as Location from 'expo-location';
 import TrailSearchButton from './components/TrailSearchButton';
+import Trails from './components/Trails';
 import { HIKING_PROJECT_KEY } from '@env';
 import axios from 'axios';
 
@@ -24,29 +25,13 @@ export default function App() {
     })();
   }, []);
 
-  // useEffect(() => {
-  //   if (location) {
-  //     const latitude = location.coords.latitude;
-  //     const longitude = location.coords.longitude;
-  //     (async () => {
-  //       const queryURL = `https://www.hikingproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxDistance=150&maxResults=300&key=${HIKING_PROJECT_KEY}`;
-  //       const searchResults = await axios.get(queryURL);
-  //       setTrails(searchResults);
-  //       console.log(trails);
-  //     })();
-      
-  //   }
-    
-  // }, []);
-
   const searchTrails = async () => {
     if (location) {
       const latitude = location.coords.latitude;
       const longitude = location.coords.longitude;
       const queryURL = `https://www.hikingproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxDistance=150&maxResults=300&key=${HIKING_PROJECT_KEY}`;
       const searchResults = await axios.get(queryURL);
-      setTrails(searchResults);
-      console.log(trails);
+      setTrails(searchResults.data.trails);
     }
   }
 
@@ -62,6 +47,7 @@ export default function App() {
       <View >
         {location && <TrailSearchButton searchTrails={searchTrails} />}
         {!location && <ActivityIndicator size="large" color="#2a7677"/>}
+        {trails && <Trails trails={trails} />}
         <StatusBar style="auto" />
       </View>
     </SafeAreaView>
