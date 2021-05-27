@@ -5,6 +5,7 @@ import * as Location from 'expo-location';
 import TrailSearchButton from './components/TrailSearchButton';
 import Trails from './components/Trails';
 import { HIKING_PROJECT_KEY } from '@env';
+import { validateTrail } from './utils/validateTrail';
 import axios from 'axios';
 
 export default function App() {
@@ -31,7 +32,7 @@ export default function App() {
       const longitude = location.coords.longitude;
       const queryURL = `https://www.hikingproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxDistance=150&maxResults=300&key=${HIKING_PROJECT_KEY}`;
       const searchResults = await axios.get(queryURL);
-      setTrails(searchResults.data.trails);
+      setTrails(searchResults.data.trails.filter(trail => validateTrail(trail)));
     }
   }
 
@@ -45,8 +46,8 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <View >
-        {location && <TrailSearchButton searchTrails={searchTrails} />}
-        {!location && <ActivityIndicator size="large" color="#2a7677"/>}
+        {location && !trails && <TrailSearchButton searchTrails={searchTrails} />}
+        {!location && !trails && <ActivityIndicator size="large" color="#2a7677"/>}
         {trails && <Trails trails={trails} />}
         <StatusBar style="auto" />
       </View>
