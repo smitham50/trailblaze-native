@@ -3,11 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, ActivityIndicator } from 'react-native';
 import * as Location from 'expo-location';
 import TrailSearchButton from './components/TrailSearchButton';
-import { HIKING_PROJECT_KEY } from '@env'
+import { HIKING_PROJECT_KEY } from '@env';
+import axios from 'axios';
 
 export default function App() {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [trails, setTrails] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -20,6 +22,21 @@ export default function App() {
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
     })();
+  }, []);
+
+  useEffect(() => {
+    if (location) {
+      const latitude = location.coords.latitude;
+      const longitude = location.coords.longitude;
+      (async () => {
+        const queryURL = `https://www.hikingproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxDistance=150&maxResults=300&key=${HIKING_PROJECT_KEY}`;
+        const searchResults = await axios.get(queryURL);
+        setTrails(searchResults);
+        console.log(trails);
+      })();
+      
+    }
+    
   }, []);
 
   let text = 'Waiting..';
