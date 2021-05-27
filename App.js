@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, ActivityIndicator } from 'react-native';
 import * as Location from 'expo-location';
 import TrailSearchButton from './components/TrailSearchButton';
+import { HIKING_PROJECT_KEY } from '@env'
 
 export default function App() {
   const [location, setLocation] = useState(null);
@@ -32,8 +33,9 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <View >
         {location && <TrailSearchButton />}
-        {!location && <ActivityIndicator size="large" color="#00ff00"/>}
+        {!location && <ActivityIndicator size="large" color="#2a7677"/>}
         <Text>{location && `${location.coords.longitude}, ${location.coords.latitude}`}</Text>
+        <Text>{location && `${HIKING_PROJECT_KEY}`}</Text>
         <StatusBar style="auto" />
       </View>
     </SafeAreaView>
