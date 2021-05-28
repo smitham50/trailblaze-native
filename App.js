@@ -1,65 +1,24 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, SafeAreaView, ActivityIndicator } from 'react-native';
-import * as Location from 'expo-location';
-import TrailSearchButton from './components/TrailSearchButton';
-import Trails from './components/Trails';
-import { HIKING_PROJECT_KEY } from '@env';
-import { validateTrail } from './utils/validateTrail';
-import axios from 'axios';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { StyleSheet } from 'react-native';
+import SearchScreen from './screens/SearchScreen';
+
+const Stack = createStackNavigator();
 
 export default function App() {
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
-  const [trails, setTrails] = useState(null);
-
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
-        return;
-      }
-
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-    })();
-  }, []);
-
-  const searchTrails = async () => {
-    if (location) {
-      const latitude = location.coords.latitude;
-      const longitude = location.coords.longitude;
-      const queryURL = `https://www.hikingproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxDistance=150&maxResults=300&key=${HIKING_PROJECT_KEY}`;
-      const searchResults = await axios.get(queryURL);
-      setTrails(searchResults.data.trails.filter(trail => validateTrail(trail)));
-    }
-  }
-
-  // let text = 'Waiting..';
-  // if (errorMsg) {
-  //   text = errorMsg;
-  // } else if (location) {
-  //   text = JSON.stringify(location);
-  // }
-
   return (
-    <SafeAreaView style={styles.container}>
-      <View >
-        {location && !trails && <TrailSearchButton searchTrails={searchTrails} />}
-        {!location && !trails && <ActivityIndicator size="large" color="#2a7677"/>}
-        {trails && <Trails trails={trails} />}
-        <StatusBar style="auto" />
-      </View>
-    </SafeAreaView>
+    <NavigationContainer >
+      <Stack.Navigator>
+        <Stack.Screen 
+          name="Search"
+          component={SearchScreen}
+        />
+      </Stack.Navigator>
+      <StatusBar style="auto" />
+    </NavigationContainer>
+    
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
