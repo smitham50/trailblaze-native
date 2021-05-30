@@ -1,17 +1,22 @@
 import React from 'react';
 import { StyleSheet, View } from "react-native";
-import MapboxGL from "@react-native-mapbox-gl/maps";
 import Trail from '../components/Trail';
-import { MAPBOX_KEY } from '@env';
+import MapView from 'react-native-maps';
 
-MapboxGL.setAccessToken(MAPBOX_KEY);
 
 export default function TrailScreen() {
   return (
     <View style={styles.page}>
       <Trail />
-      <View style={styles.container}>
-        <MapboxGL.MapView style={styles.map} />
+      <View style={styles.mapContainer}>
+        <MapView 
+          initialRegion={{
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        />
       </View>
     </View>
   );
@@ -23,7 +28,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  container: {
+  mapContainer: {
     height: 400,
     width: 400
   },
