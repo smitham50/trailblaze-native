@@ -6,11 +6,13 @@ import { HIKING_PROJECT_KEY } from '@env';
 import { validateTrail } from '../utils/validateTrail';
 import * as Location from 'expo-location';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
-export default function SearchScreen(props) {
+function SearchScreen(props) {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-  const [trails, setTrails] = useState(null);
+
+  const { setTrails } = props;
 
   useEffect(() => {
     (async () => {
@@ -38,20 +40,31 @@ export default function SearchScreen(props) {
       const longitude = location.coords.longitude;
       const queryURL = `https://www.hikingproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxDistance=150&maxResults=50&key=${HIKING_PROJECT_KEY}`;
       const searchResults = await axios.get(queryURL);
-      setTrails(searchResults.data.trails.filter(trail => validateTrail(trail)));
+      await setTrails(searchResults.data.trails.filter(trail => validateTrail(trail)));
+      props.navigation.navigate('Search Results');
     }
   }
 
-  console.log(props);
-
   return (
     <View style={styles.container}>
-      {location && !trails && <TrailSearchButton searchTrails={searchTrails} />}
-      {!location && !trails && <ActivityIndicator size="large" color="#2a7677" />}
-      {trails && <Trails trails={trails} />}
+      {location && <TrailSearchButton searchTrails={searchTrails} />}
+      {!location && <ActivityIndicator size="large" color="#2a7677" />}
     </View>
   );
 }
+
+function mdp(dispatch) {
+  return {
+    setTrails: (trails) => {
+      dispatch({
+        type: "SET_TRAILS",
+        payload: trails
+      })
+    }
+  }
+}
+
+export default connect(null, mdp)(SearchScreen);
 
 const styles = StyleSheet.create({
   container: {

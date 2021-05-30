@@ -1,8 +1,9 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
 import Trail from './Trail';
+import { connect } from 'react-redux';
 
-export default function Trails(props) {
+function Trails(props) {
   const renderTrails = () => {
     return props.trails.map(trail => {
       console.log(trail);
@@ -16,3 +17,15 @@ export default function Trails(props) {
     </ScrollView>
   );
 }
+
+function msp(state) {
+  const {
+    trails
+  } = state.trail;
+
+  return {
+    trails
+  }
+}
+
+export default connect(msp, null)(Trails);

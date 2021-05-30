@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import SearchScreen from './screens/SearchScreen';
 import TrailScreen from './screens/TrailScreen';
+import SearchResultScreen from './screens/SearchResultScreen';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import trailReducer from './reducers/trailReducer';
@@ -28,6 +29,10 @@ export default function App() {
           <Stack.Screen
             name="Trail"
             component={TrailScreen}
+          />
+          <Stack.Screen 
+            name="Search Results"
+            component={SearchResultScreen}
           />
         </Stack.Navigator>
         <StatusBar style="auto" />
