@@ -42,7 +42,7 @@ export default function SearchScreen(props) {
     }
   }
 
-  console.log(location, trails);
+  console.log(props);
 
   return (
     <View style={styles.container}>
