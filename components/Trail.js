@@ -1,16 +1,26 @@
 import React from 'react';
-import { ImageBackground, Text, View, StyleSheet } from 'react-native';
+import { ImageBackground, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Trail(props) {
+  const navigation = useNavigation();
+
+  const routeToTrailScreen = () => {
+    navigation.navigate('Trail', { trail: props.trail });
+  }
+
   return (
-    <View>
-      <ImageBackground style={styles.image} source={{uri: props.trail.imgMedium}}>
+    <TouchableOpacity onPress={routeToTrailScreen}>
+      <ImageBackground 
+        style={styles.image} 
+        source={{uri: props.trail?.imgMedium}}
+      >
         <View style={styles.overlay}>
-          <Text style={styles.text}>{props.trail.name}</Text>
-          <Text style={styles.text}>{props.trail.location}</Text>
+          <Text style={styles.text}>{props.trail?.name}</Text>
+          <Text style={styles.text}>{props.trail?.location}</Text>
         </View>
       </ImageBackground>
-    </View>
+    </TouchableOpacity>
   )
 }
 
@@ -32,6 +42,6 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     margin: 5,
-    fontSize: 20
+    fontSize: 18
   }
 });

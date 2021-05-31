@@ -6,8 +6,7 @@ import { connect } from 'react-redux';
 function Trails(props) {
   const renderTrails = () => {
     return props.trails.map(trail => {
-      console.log(trail);
-      return <Trail key={trail.id} trail={trail}/>
+      return <Trail key={trail.id} trail={trail} />
     });
   }
 

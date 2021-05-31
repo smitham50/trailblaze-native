@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import TrailSearchButton from '../components/TrailSearchButton';
-import Trails from '../components/Trails';
 import { HIKING_PROJECT_KEY } from '@env';
 import { validateTrail } from '../utils/validateTrail';
 import * as Location from 'expo-location';
@@ -39,9 +38,13 @@ function SearchScreen(props) {
       const latitude = location.coords.latitude;
       const longitude = location.coords.longitude;
       const queryURL = `https://www.hikingproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxDistance=150&maxResults=50&key=${HIKING_PROJECT_KEY}`;
-      const searchResults = await axios.get(queryURL);
-      await setTrails(searchResults.data.trails.filter(trail => validateTrail(trail)));
-      props.navigation.navigate('Search Results');
+      try {
+        const searchResults = await axios.get(queryURL);
+        setTrails(searchResults.data.trails.filter(trail => validateTrail(trail)));
+        props.navigation.navigate('Search Results');
+      } catch (e) {
+        console.log(e);
+      }
     }
   }
 
