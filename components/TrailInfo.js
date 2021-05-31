@@ -9,7 +9,7 @@ const TrailInfo = (props) => {
       <Text style={styles.text}>Difficulty: {props.trail.difficulty}</Text>
       <Text style={styles.text}>Ascent: {props.trail.ascent}</Text>
       <Text style={styles.text}>Descent: {props.trail.descent}</Text>
-      <Text style={styles.text}>Rating: {props.trail.stars} from {props.trail.starVotes} users</Text>
+      <Text style={styles.text}>Rating: {props.trail.stars} stars from {props.trail.starVotes} users</Text>
     </View>
   );
 }
@@ -18,10 +18,11 @@ const styles = StyleSheet.create({
   overlay: {
     position: 'absolute',
     top: 0,
-    left: 5,
+    left: 0,
     right: 0,
     bottom: 0,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#0000002e'
   },
   text: {
     color: 'white',
