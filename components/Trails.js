@@ -18,13 +18,9 @@ function Trails(props) {
 }
 
 function msp(state) {
-  const {
-    trails
-  } = state.trail;
+  const { trails } = state.trail;
 
-  return {
-    trails
-  }
+  return { trails };
 }
 
 export default connect(msp, null)(Trails);

@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import { GOOGLE_DIRECTIONS_API_KEY} from '@env';
 import MapViewDirections from 'react-native-maps-directions';
 
-
 function TrailScreen(props) {
   const trail = props.route.params.trail;
   const { location } = props;
@@ -20,7 +19,7 @@ function TrailScreen(props) {
 
   return (
     <View style={styles.page}>
-      <Trail trail={trail} />
+      <Trail trail={trail} route={props.route}/>
       <View style={styles.mapContainer}>
         <MapView 
           initialRegion={{

@@ -1,24 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ImageBackground, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import TrailInfo from './TrailInfo';
 
 export default function Trail(props) {
+  const [showTrailInfo, setShowTrailInfo] = useState(false);
   const navigation = useNavigation();
 
   const routeToTrailScreen = () => {
     navigation.navigate('Trail', { trail: props.trail });
   }
 
+  const toggleShowTrailInfo = () => {
+    setShowTrailInfo(!showTrailInfo);
+  }
+
   return (
-    <TouchableOpacity onPress={routeToTrailScreen}>
+    <TouchableOpacity onPress={props.route ? toggleShowTrailInfo : routeToTrailScreen}>
       <ImageBackground 
         style={styles.image} 
         source={{uri: props.trail?.imgMedium}}
       >
-        <View style={styles.overlay}>
-          <Text style={styles.text}>{props.trail?.name}</Text>
-          <Text style={styles.text}>{props.trail?.location}</Text>
-        </View>
+        {
+          showTrailInfo
+          ? <TrailInfo trail={props.trail}/>
+          : <View style={styles.overlay}>
+              <Text style={styles.text}>{props.trail?.name}</Text>
+              <Text style={styles.text}>{props.trail?.location}</Text>
+            </View>
+        }
+        
       </ImageBackground>
     </TouchableOpacity>
   )

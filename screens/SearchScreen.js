@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { View, ActivityIndicator, StyleSheet, ImageBackground } from 'react-native';
+import { View, ActivityIndicator, StyleSheet, ImageBackground, Text } from 'react-native';
 import TrailSearchButton from '../components/TrailSearchButton';
 import { HIKING_PROJECT_KEY } from '@env';
 import { validateTrail } from '../utils/validateTrail';
@@ -24,13 +24,6 @@ function SearchScreen(props) {
     })();
   }, []);
 
-  // let text = 'Waiting..';
-  // if (errorMsg) {
-  //   text = errorMsg;
-  // } else if (location) {
-  //   text = JSON.stringify(location);
-  // }
-
   const searchTrails = async () => {
     if (location) {
       const latitude = location.coords.latitude;
@@ -41,7 +34,7 @@ function SearchScreen(props) {
         setTrails(searchResults.data.trails.filter(trail => validateTrail(trail)));
         props.navigation.navigate('Search Results');
       } catch (e) {
-        console.log(e);
+        setErrorMsg(e);
       }
     }
   }
@@ -51,6 +44,7 @@ function SearchScreen(props) {
       <ImageBackground style={styles.image} source={require('../assets/images/trail.jpg')}>
         {location && <TrailSearchButton searchTrails={searchTrails} />}
         {!location && <ActivityIndicator size="large" color="#2a7677" />}
+        {errorMsg && <Text>{errorMsg}</Text>}
       </ImageBackground>
     </View>
   );
