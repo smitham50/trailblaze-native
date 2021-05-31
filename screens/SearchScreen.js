@@ -8,10 +8,8 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 function SearchScreen(props) {
-  const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-
-  const { setTrails } = props;
+  const { setTrails, setLocation, location } = props;
 
   useEffect(() => {
     (async () => {
@@ -56,18 +54,34 @@ function SearchScreen(props) {
   );
 }
 
+function msp(state) {
+  const {
+    location
+  } = state.user;
+
+  return {
+    location
+  }
+}
+
 function mdp(dispatch) {
   return {
     setTrails: (trails) => {
       dispatch({
         type: "SET_TRAILS",
         payload: trails
-      })
+      });
+    },
+    setLocation: (location) => {
+      dispatch({
+        type: "SET_LOCATION",
+        payload: location
+      });
     }
   }
 }
 
-export default connect(null, mdp)(SearchScreen);
+export default connect(msp, mdp)(SearchScreen);
 
 const styles = StyleSheet.create({
   container: {

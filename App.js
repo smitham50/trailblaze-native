@@ -9,9 +9,11 @@ import SearchResultScreen from './screens/SearchResultScreen';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import trailReducer from './reducers/trailReducer';
+import userReducer from './reducers/userReducer';
 
 const rootReducer = combineReducers({
-  trail: trailReducer
+  trail: trailReducer,
+  user: userReducer
 });
 const store = createStore(rootReducer);
 

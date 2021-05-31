@@ -4,10 +4,16 @@ import Trail from '../components/Trail';
 import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
+import { GOOGLE_DIRECTIONS_API_KEY} from '@env';
+import MapViewDirections from 'react-native-maps-directions';
 
 
 function TrailScreen(props) {
   const trail = props.route.params.trail;
+  const { location } = props;
+
+  const coords = { latitude: location.coords.latitude, longitude: location.coords.longitude }
+  console.log(location.coords);
 
   return (
     <View style={styles.page}>
@@ -28,13 +34,31 @@ function TrailScreen(props) {
             title={trail.name}
             description={trail.description}
           />
+          <Marker
+            key={location.coords.latitude}
+            coordinate={ coords }
+            title={'You are here'}
+          />
+          <MapViewDirections 
+            origin={ coords }
+            destination={{ latitude: trail.latitude, longitude: trail.longitude}}
+            apikey={GOOGLE_DIRECTIONS_API_KEY}
+            strokeWidth={3}
+            strokeColor="hotpink"
+          />
         </MapView>
       </View>
     </View>
   );
 }
 
-export default connect(null, null)(TrailScreen);
+function msp(state) {
+  const { location } = state.user;
+
+  return { location };
+}
+
+export default connect(msp, null)(TrailScreen);
 
 const styles = StyleSheet.create({
   page: {
