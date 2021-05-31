@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text, Linking } from "react-native";
 import Trail from '../components/Trail';
 import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
@@ -13,7 +13,10 @@ function TrailScreen(props) {
   const { location } = props;
 
   const coords = { latitude: location.coords.latitude, longitude: location.coords.longitude }
-  console.log(location.coords);
+  
+  const openInMaps = () => {
+    Linking.openURL(`maps://app?saddr=${coords.latitude}+${coords.longitude}&daddr=${trail.latitude}+${trail.longitude}`);
+  }
 
   return (
     <View style={styles.page}>
@@ -41,11 +44,14 @@ function TrailScreen(props) {
           />
           <MapViewDirections 
             origin={ coords }
-            destination={{ latitude: trail.latitude, longitude: trail.longitude}}
-            apikey={GOOGLE_DIRECTIONS_API_KEY}
+            destination={{ latitude: trail.latitude, longitude: trail.longitude }}
+            apikey={ GOOGLE_DIRECTIONS_API_KEY }
             strokeWidth={3}
             strokeColor="hotpink"
           />
+          <TouchableOpacity style={styles.mapButton} onPress={openInMaps}>
+            <Text style={styles.text}>Open in Maps</Text>
+          </TouchableOpacity>
         </MapView>
       </View>
     </View>
@@ -74,6 +80,22 @@ const styles = StyleSheet.create({
   map: {
     flex: 1,
     ...StyleSheet.absoluteFillObject
+  },
+  mapButton: {
+    position: 'absolute',
+    top: 8,
+    left: 16,
+    borderStyle: 'solid',
+    borderWidth: 2,
+    borderColor: 'white',
+    borderRadius: 50,
+    paddingVertical: 5,
+    paddingHorizontal: 15
+  },
+  text: {
+    color: 'white',
+    top: 8,
+    left: 16
   }
 });
 
