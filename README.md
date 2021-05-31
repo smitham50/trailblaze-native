@@ -2,9 +2,9 @@
 
 # Installation
 
-1. [Download Expo Go on your mobile phone]('https://apps.apple.com/us/app/expo-go/id982107779')
+1. [Download Expo Go on your mobile phone](https://apps.apple.com/us/app/expo-go/id982107779)
 
-2. Open phone's camera app and focus on QR code [here]('https://expo.io/@smitham50/trailblaze-native')
+2. Open phone's camera app and focus on QR code [here](https://expo.io/@smitham50/trailblaze-native)
 
 # Use
 
