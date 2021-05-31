@@ -43,7 +43,7 @@ function SearchScreen(props) {
     <View style={styles.container}>
       <ImageBackground style={styles.image} source={require('../assets/images/trail.jpg')}>
         {location && <TrailSearchButton searchTrails={searchTrails} />}
-        {!location && <ActivityIndicator size="large" color="#2a7677" />}
+        {!location && <ActivityIndicator size="large" color="white" />}
         {errorMsg && <Text>{errorMsg}</Text>}
       </ImageBackground>
     </View>
