@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from "react-native";
 import Trail from '../components/Trail';
 import MapView from 'react-native-maps';
+import { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 
 
@@ -20,7 +21,14 @@ function TrailScreen(props) {
             longitudeDelta: 0.0421
           }}
           style={styles.map}
-        />
+        >
+          <Marker
+            key={trail.id}
+            coordinate={{ latitude: trail.latitude, longitude: trail.longitude }}
+            title={trail.name}
+            description={trail.description}
+          />
+        </MapView>
       </View>
     </View>
   );
@@ -41,7 +49,7 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFillObject
   }
 });
 
