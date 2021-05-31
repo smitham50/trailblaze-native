@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, ActivityIndicator, StyleSheet, ImageBackground } from 'react-native';
 import TrailSearchButton from '../components/TrailSearchButton';
 import { HIKING_PROJECT_KEY } from '@env';
 import { validateTrail } from '../utils/validateTrail';
@@ -48,8 +48,10 @@ function SearchScreen(props) {
 
   return (
     <View style={styles.container}>
-      {location && <TrailSearchButton searchTrails={searchTrails} />}
-      {!location && <ActivityIndicator size="large" color="#2a7677" />}
+      <ImageBackground style={styles.image} source={require('../assets/images/trail.jpg')}>
+        {location && <TrailSearchButton searchTrails={searchTrails} />}
+        {!location && <ActivityIndicator size="large" color="#2a7677" />}
+      </ImageBackground>
     </View>
   );
 }
@@ -88,6 +90,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
+    justifyContent: 'center'
+  },
+  image: {
+    flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
+    ...StyleSheet.absoluteFillObject
   }
 });

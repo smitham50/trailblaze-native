@@ -15,18 +15,15 @@ const styles = StyleSheet.create({
   button: {
     borderStyle: 'solid',
     borderWidth: 2,
-    borderColor: 'black',
+    borderColor: 'white',
     borderRadius: 50,
     padding: 20,
     paddingTop: 38,
-    color: 'gray',
     width: 300,
-    height: 100,
-
+    height: 100
   },
   buttonText: {
     textAlign: 'center',
-    color: 'black',
-
+    color: 'white'
   }
 });
