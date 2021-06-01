@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Linking } from "react-native";
 import Trail from '../components/Trail';
 import MapView from 'react-native-maps';
@@ -40,7 +40,7 @@ function TrailScreen(props) {
           }}
           style={map}
           ref={mapRef}
-          onLayout={() => mapRef?.current.fitToCoordinates(latLongs, { edgePadding: { top: 10, right: 10, bottom: 10, left: 10 }, animated: false })}
+          onLayout={() => mapRef?.current.fitToCoordinates(latLongs, { edgePadding: { top: 35, right: 35, bottom: 35, left: 35 }, animated: false })}
         >
           <Marker
             key={trail.id}
