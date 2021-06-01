@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Linking } from "react-native";
 import Trail from '../components/Trail';
 import MapView from 'react-native-maps';
@@ -15,6 +15,13 @@ function TrailScreen(props) {
     latitude: location.coords.latitude, 
     longitude: location.coords.longitude 
   };
+
+  const mapRef = useRef(null);
+
+  const latLongs = [
+    { latitude: coords.latitude, longitude: coords.longitude },
+    { latitude: trail.latitude, longitude: trail.longitude }
+  ];
   
   const openInMaps = () => {
     Linking.openURL(`maps://app?saddr=${coords.latitude}+${coords.longitude}&daddr=${trail.latitude}+${trail.longitude}`);
@@ -28,16 +35,17 @@ function TrailScreen(props) {
           initialRegion={{
             latitude: trail.latitude,
             longitude: trail.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421
+            latitudeDelta: 0.015, 
+            longitudeDelta: 0.0121
           }}
           style={map}
+          ref={mapRef}
+          onLayout={() => mapRef?.current.fitToCoordinates(latLongs, { edgePadding: { top: 10, right: 10, bottom: 10, left: 10 }, animated: false })}
         >
           <Marker
             key={trail.id}
             coordinate={{ latitude: trail.latitude, longitude: trail.longitude }}
             title={trail.name}
-            description={trail.description}
           />
           <Marker
             key={location.coords.latitude}
