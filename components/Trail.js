@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ImageBackground, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { ImageBackground, Text, TouchableOpacity, View, StyleSheet, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import TrailInfo from './TrailInfo';
 
@@ -27,6 +27,7 @@ export default function Trail(props) {
           : <View style={styles.overlay}>
               <Text style={styles.text}>{props.trail?.name}</Text>
               <Text style={styles.text}>{props.trail?.location}</Text>
+              <Text style={{...styles.text, ...styles.info}}>Tap image for info</Text>
             </View>
         }
         
@@ -54,5 +55,13 @@ const styles = StyleSheet.create({
     color: 'white',
     margin: 5,
     fontSize: 18
+  },
+  info: {
+    position: 'absolute',
+    top: 0,
+    left: 10,
+    right: 0,
+    bottom: 0,
+    fontSize: 12
   }
 });
