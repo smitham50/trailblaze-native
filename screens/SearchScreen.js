@@ -29,7 +29,7 @@ function SearchScreen(props) {
     if (location) {
       const latitude = location.coords.latitude;
       const longitude = location.coords.longitude;
-      const queryURL = `https://www.hikingproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxDistance=150&maxResults=50&key=${HIKING_PROJECT_KEY}`;
+      const queryURL = `https://www.hikingproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxDistance=150&maxResults=100&key=${HIKING_PROJECT_KEY}`;
       try {
         const searchResults = await axios.get(queryURL);
         setTrails(searchResults.data.trails.filter(trail => validateTrail(trail)));
