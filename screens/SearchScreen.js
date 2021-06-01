@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 function SearchScreen(props) {
   const [errorMsg, setErrorMsg] = useState(null);
   const { setTrails, setLocation, location } = props;
+  const { container, image } = styles;
 
   useEffect(() => {
     (async () => {
@@ -40,8 +41,8 @@ function SearchScreen(props) {
   }
 
   return (
-    <View style={styles.container}>
-      <ImageBackground style={styles.image} source={require('../assets/images/trail.jpg')}>
+    <View style={container}>
+      <ImageBackground style={image} source={require('../assets/images/trail.jpg')}>
         {location && <TrailSearchButton searchTrails={searchTrails} />}
         {!location && <ActivityIndicator size="large" color="white" />}
         {errorMsg && <Text>{errorMsg}</Text>}

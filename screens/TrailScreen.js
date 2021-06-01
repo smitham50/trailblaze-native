@@ -10,17 +10,20 @@ import MapViewDirections from 'react-native-maps-directions';
 function TrailScreen(props) {
   const trail = props.route.params.trail;
   const { location } = props;
-
-  const coords = { latitude: location.coords.latitude, longitude: location.coords.longitude }
+  const { page, mapContainer, map, mapButton, text } = styles;
+  const coords = { 
+    latitude: location.coords.latitude, 
+    longitude: location.coords.longitude 
+  };
   
   const openInMaps = () => {
     Linking.openURL(`maps://app?saddr=${coords.latitude}+${coords.longitude}&daddr=${trail.latitude}+${trail.longitude}`);
   }
 
   return (
-    <View style={styles.page}>
+    <View style={page}>
       <Trail trail={trail} route={props.route}/>
-      <View style={styles.mapContainer}>
+      <View style={mapContainer}>
         <MapView 
           initialRegion={{
             latitude: trail.latitude,
@@ -28,7 +31,7 @@ function TrailScreen(props) {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421
           }}
-          style={styles.map}
+          style={map}
         >
           <Marker
             key={trail.id}
@@ -48,8 +51,8 @@ function TrailScreen(props) {
             strokeWidth={3}
             strokeColor="hotpink"
           />
-          <TouchableOpacity style={styles.mapButton} onPress={openInMaps}>
-            <Text style={styles.text}>Open in Maps</Text>
+          <TouchableOpacity style={mapButton} onPress={openInMaps}>
+            <Text style={text}>Open in Maps</Text>
           </TouchableOpacity>
         </MapView>
       </View>
@@ -94,7 +97,8 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     top: 8,
-    left: 16
+    left: 16,
+    fontSize: 18
   }
 });
 

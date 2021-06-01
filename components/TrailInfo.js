@@ -2,14 +2,25 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const TrailInfo = (props) => {
+  const { text, overlay } = styles;
+  const { 
+    summary,
+    length,
+    difficulty,
+    ascent,
+    descent,
+    stars,
+    starVotes
+  } = props.trail;
+
   return (
-    <View style={styles.overlay}>
-      <Text style={styles.text}>{props.trail.summary}</Text>
-      <Text style={styles.text}>Length: {props.trail.length} miles</Text>
-      <Text style={styles.text}>Difficulty: {props.trail.difficulty}</Text>
-      <Text style={styles.text}>Ascent: {props.trail.ascent}</Text>
-      <Text style={styles.text}>Descent: {props.trail.descent}</Text>
-      <Text style={styles.text}>Rating: {props.trail.stars} stars from {props.trail.starVotes} users</Text>
+    <View style={overlay}>
+      <Text style={text}>{summary}</Text>
+      <Text style={text}>Length: {length} miles</Text>
+      <Text style={text}>Difficulty: {difficulty}</Text>
+      <Text style={text}>Ascent: {ascent}</Text>
+      <Text style={text}>Descent: {descent}</Text>
+      <Text style={text}>Rating: {stars} stars from {starVotes} users</Text>
     </View>
   );
 }

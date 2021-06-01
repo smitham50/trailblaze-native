@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ImageBackground, Text, TouchableOpacity, View, StyleSheet, Image } from 'react-native';
+import { ImageBackground, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import TrailInfo from './TrailInfo';
 
@@ -7,8 +7,11 @@ export default function Trail(props) {
   const [showTrailInfo, setShowTrailInfo] = useState(false);
   const navigation = useNavigation();
 
+  const { trail, route } = props;
+  const { overlay, text, info, image } = styles;
+
   const routeToTrailScreen = () => {
-    navigation.navigate('Trail', { trail: props.trail });
+    navigation.navigate('Trail', { trail: trail });
   }
 
   const toggleShowTrailInfo = () => {
@@ -16,21 +19,20 @@ export default function Trail(props) {
   }
 
   return (
-    <TouchableOpacity onPress={props.route ? toggleShowTrailInfo : routeToTrailScreen}>
+    <TouchableOpacity onPress={route ? toggleShowTrailInfo : routeToTrailScreen}>
       <ImageBackground 
-        style={styles.image} 
-        source={{uri: props.trail?.imgMedium}}
+        style={image} 
+        source={{uri: trail?.imgMedium}}
       >
         {
           showTrailInfo
-          ? <TrailInfo trail={props.trail}/>
-          : <View style={styles.overlay}>
-              <Text style={styles.text}>{props.trail?.name}</Text>
-              <Text style={styles.text}>{props.trail?.location}</Text>
-              <Text style={{...styles.text, ...styles.info}}>Tap image for info</Text>
+          ? <TrailInfo trail={trail}/>
+          : <View style={overlay}>
+              <Text style={text}>{trail?.name}</Text>
+              <Text style={text}>{trail?.location}</Text>
+              {route && <Text style={{...text, ...info}}>Tap image for info</Text>}
             </View>
         }
-        
       </ImageBackground>
     </TouchableOpacity>
   )
@@ -58,10 +60,10 @@ const styles = StyleSheet.create({
   },
   info: {
     position: 'absolute',
-    top: 0,
+    top: 365,
     left: 10,
     right: 0,
     bottom: 0,
-    fontSize: 12
+    fontSize: 10
   }
 });
