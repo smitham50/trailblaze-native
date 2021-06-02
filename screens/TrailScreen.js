@@ -97,17 +97,16 @@ const styles = StyleSheet.create({
     left: 16,
     borderStyle: 'solid',
     borderWidth: 2,
-    borderColor: 'white',
-    borderRadius: 50,
+    borderColor: '#a7a7a7',
+    borderRadius: 10,
     paddingVertical: 5,
-    paddingHorizontal: 15,
-    backgroundColor: '#a7a7a70f'
+    paddingHorizontal: 15
   },
   text: {
-    color: 'white',
+    color: '#a7a7a7',
     top: 8,
     left: 16,
-    fontSize: 18
+    fontSize: 14
   }
 });
 
