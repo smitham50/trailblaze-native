@@ -1,5 +1,12 @@
 import React, { useRef } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, Linking } from "react-native";
+import { 
+  StyleSheet, 
+  View, 
+  TouchableOpacity, 
+  Text, 
+  Linking,
+  Dimensions
+} from "react-native";
 import Trail from '../components/Trail';
 import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
@@ -76,6 +83,8 @@ function msp(state) {
 
 export default connect(msp, null)(TrailScreen);
 
+const { width, height } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   page: {
     flex: 1,
@@ -83,8 +92,8 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   mapContainer: {
-    height: 400,
-    width: 400,
+    height: height * .45,
+    width: width * .98,
     margin: 5
   },
   map: {

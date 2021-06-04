@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
-import { ImageBackground, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import TrailInfo from './TrailInfo';
+import { 
+  ImageBackground, 
+  Text, 
+  TouchableOpacity, 
+  View, 
+  StyleSheet, 
+  Dimensions 
+} from 'react-native';
 
 export default function Trail(props) {
   const [showTrailInfo, setShowTrailInfo] = useState(false);
@@ -38,11 +45,13 @@ export default function Trail(props) {
   )
 }
 
+const { width, height } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   image: {
-    width: 400,
-    height: 400,
-    margin: 5
+    width: width * .98,
+    height: height * .45,
+    margin: 4
   },
   overlay: {
     position: 'absolute', 
