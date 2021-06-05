@@ -18,12 +18,14 @@ const styles = StyleSheet.create({
   button: {
     borderStyle: 'solid',
     borderWidth: 2,
-    borderColor: 'white',
-    borderRadius: 50,
+    borderColor: '#ffffffcf',
+    borderRadius: 20,
     padding: 20,
     paddingTop: 38,
+    marginBottom: 20,
     width: 300,
-    height: 100
+    height: 100,
+    backgroundColor: '#37373842'
   },
   buttonText: {
     textAlign: 'center',
