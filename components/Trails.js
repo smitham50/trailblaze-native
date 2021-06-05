@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 function Trails(props) {
   const renderTrails = () => {
-    return props.trails.map(trail => {
+    return props.displayedTrails.map(trail => {
       return <Trail key={trail.id} trail={trail} />
     });
   }
@@ -18,9 +18,9 @@ function Trails(props) {
 }
 
 function msp(state) {
-  const { trails } = state.trail;
+  const { displayedTrails } = state.trail;
 
-  return { trails };
+  return { displayedTrails };
 }
 
 export default connect(msp, null)(Trails);

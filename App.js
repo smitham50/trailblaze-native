@@ -8,6 +8,7 @@ import TrailScreen from './screens/TrailScreen';
 import SearchResultScreen from './screens/SearchResultScreen';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
+import { Button } from 'react-native';
 import trailReducer from './reducers/trailReducer';
 import userReducer from './reducers/userReducer';
 
@@ -19,7 +20,11 @@ const store = createStore(rootReducer);
 
 const Stack = createStackNavigator();
 
-export default function App() {
+export default function App(props) {
+  const openFilters = () => {
+    // open navigation drawer
+  }
+
   return (
     <Provider store={store}>
       <NavigationContainer >
@@ -35,6 +40,10 @@ export default function App() {
           <Stack.Screen 
             name="Search Results"
             component={SearchResultScreen}
+            options={{
+              headerTitle: 'Search Results',
+              headerRight: () => <Button title="Filter Results" onClick={openFilters} />
+            }}
           />
         </Stack.Navigator>
         <StatusBar style="auto" />
