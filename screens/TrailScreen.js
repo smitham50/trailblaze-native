@@ -11,7 +11,7 @@ import Trail from '../components/Trail';
 import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
-import { GOOGLE_DIRECTIONS_API_KEY} from '@env';
+import { GOOGLE_DIRECTIONS_API_KEY } from '@env';
 import MapViewDirections from 'react-native-maps-directions';
 
 function TrailScreen(props) {
@@ -31,7 +31,8 @@ function TrailScreen(props) {
   ];
   
   const openInMaps = () => {
-    Linking.openURL(`maps://app?saddr=${coords.latitude}+${coords.longitude}&daddr=${trail.latitude}+${trail.longitude}`);
+    const mapApplication = Platform.OS === 'ios' ? 'maps:' : 'geo:';
+    Linking.openURL(`${mapApplication}://app?saddr=${coords.latitude}+${coords.longitude}&daddr=${trail.latitude}+${trail.longitude}`);
   }
 
   return (
