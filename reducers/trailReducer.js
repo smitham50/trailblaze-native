@@ -1,5 +1,4 @@
 import { 
-  filterByDistance, 
   filterByLength, 
   filterByDifficulty 
 } from '../utils/searchFilters'; 
@@ -16,11 +15,6 @@ export default function TrailReducer(prevState = defaultState, action) {
         ...prevState,
         trails: action.payload,
         displayedTrails: action.payload
-      }
-    case "FILTER_BY_DISTANCE":
-      return {
-        ...prevState,
-        displayedTrails: filterByDistance([...prevState.trails])
       }
     case "FILTER_BY_LENGTH":
       return {
