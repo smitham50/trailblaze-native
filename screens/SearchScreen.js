@@ -7,6 +7,7 @@ import {
   Text
 } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
+import { AntDesign } from '@expo/vector-icons';
 import TrailSearchButton from '../components/TrailSearchButton';
 import { HIKING_PROJECT_KEY } from '@env';
 import { validateTrail } from '../utils/validateTrail';
@@ -66,6 +67,9 @@ function SearchScreen(props) {
               value={distanceToTravel}
               placeHolder={placeholder}
               style={pickerStyle}
+              Icon={() => {
+                return <AntDesign name="caretdown" size={20} color="white" />;
+              }}
               items={[
                 { label: '15 miles', value: 15 },
                 { label: '30 miles', value: 30 },
@@ -173,7 +177,7 @@ const pickerStyle = {
     position: 'absolute',
     backgroundColor: 'transparent',
     borderTopWidth: 5,
-    borderTopColor: '#00000099',
+    borderTopColor: 'transparent',
     borderRightWidth: 5,
     borderRightColor: 'transparent',
     borderLeftWidth: 5,
@@ -182,5 +186,10 @@ const pickerStyle = {
     height: 0,
     top: 20,
     right: 15,
+    color: 'white'
   },
+  iconContainer: {
+    top: 15,
+    right: 18,
+  }
 };

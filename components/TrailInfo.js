@@ -33,12 +33,13 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     justifyContent: 'center',
-    backgroundColor: '#0000002e'
+    backgroundColor: '#0000002e',
   },
   text: {
     color: 'white',
     margin: 5,
-    fontSize: 18
+    fontSize: 18,
+    
   }
 })
 
