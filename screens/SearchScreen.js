@@ -72,8 +72,7 @@ function SearchScreen(props) {
                 { label: '60 miles', value: 60 },
                 { label: '100 miles', value: 100 },
                 { label: '150 miles', value: 150 },
-                { label: '200 miles', value: 200 },
-                { label: '250 miles', value: 250 }
+                { label: '200 miles', value: 200 }
               ]}
             />
             <TrailSearchButton searchTrails={searchTrails} />
