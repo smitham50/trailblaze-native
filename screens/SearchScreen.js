@@ -67,11 +67,13 @@ function SearchScreen(props) {
               placeHolder={placeholder}
               style={pickerStyle}
               items={[
+                { label: '15 miles', value: 15 },
                 { label: '30 miles', value: 30 },
                 { label: '60 miles', value: 60 },
                 { label: '100 miles', value: 100 },
                 { label: '150 miles', value: 150 },
-                { label: '200 miles', value: 200 }
+                { label: '200 miles', value: 200 },
+                { label: '250 miles', value: 250 }
               ]}
             />
             <TrailSearchButton searchTrails={searchTrails} />
