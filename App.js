@@ -42,7 +42,7 @@ export default function App(props) {
             component={SearchResultScreen}
             options={{
               headerTitle: 'Search Results',
-              headerRight: () => <Button title="Filter Results" onClick={openFilters} />
+              // headerRight: () => <Button title="Filter Results" onClick={openFilters} />
             }}
           />
         </Stack.Navigator>
