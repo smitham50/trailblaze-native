@@ -19,7 +19,7 @@ function SearchScreen(props) {
   const [errorMsg, setErrorMsg] = useState(null);
   const { setTrails, setLocation, location } = props;
   const { container, image, labelText, searchView } = styles;
-  const [ distanceToTravel, setDistanceToTravel ] = useState(100);
+  const [ distanceToTravel, setDistanceToTravel ] = useState(90);
 
   useEffect(() => {
     (async () => {
@@ -57,9 +57,11 @@ function SearchScreen(props) {
 
   return (
     <View style={container}>
-      <ImageBackground style={image} source={require('../assets/images/trail.jpg')}>
-        {
-          location && 
+      <ImageBackground
+        style={image}
+        source={require("../assets/images/trail.jpg")}
+      >
+        {location && (
           <View style={searchView}>
             <Text style={labelText}>How far would you like to travel?</Text>
             <RNPickerSelect
@@ -71,17 +73,17 @@ function SearchScreen(props) {
                 return <AntDesign name="caretdown" size={20} color="white" />;
               }}
               items={[
-                { label: '15 miles', value: 15 },
-                { label: '30 miles', value: 30 },
-                { label: '60 miles', value: 60 },
-                { label: '100 miles', value: 100 },
-                { label: '150 miles', value: 150 },
-                { label: '200 miles', value: 200 }
+                { label: "30 miles", value: 30 },
+                { label: "60 miles", value: 60 },
+                { label: "90 miles", value: 90 },
+                { label: "120 miles", value: 120 },
+                { label: "150 miles", value: 150 },
+                { label: "180 miles", value: 180 },
               ]}
             />
             <TrailSearchButton searchTrails={searchTrails} />
           </View>
-        }
+        )}
         {!location && <ActivityIndicator size="large" color="white" />}
         {errorMsg && <Text>{errorMsg}</Text>}
       </ImageBackground>
