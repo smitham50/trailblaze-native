@@ -50,8 +50,8 @@ function SearchScreen(props) {
   }
 
   const placeholder = {
-    label: '100 miles',
-    value: 100,
+    label: '90 miles',
+    value: 90,
     color: '#3c3d4ae0',
   };
 

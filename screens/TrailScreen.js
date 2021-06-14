@@ -37,40 +37,51 @@ function TrailScreen(props) {
 
   return (
     <View style={page}>
-      <Trail trail={trail} route={props.route}/>
+      <Trail trail={trail} route={props.route} />
       <View style={mapContainer}>
-        <MapView 
+        <MapView
           initialRegion={{
             latitude: trail.latitude,
             longitude: trail.longitude,
-            latitudeDelta: 0.015, 
-            longitudeDelta: 0.0121
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121,
           }}
           style={map}
           ref={mapRef}
-          onLayout={() => mapRef?.current.fitToCoordinates(latLongs, { edgePadding: { top: 35, right: 35, bottom: 35, left: 35 }, animated: false })}
+          onLayout={() =>
+            mapRef?.current.fitToCoordinates(latLongs, {
+              edgePadding: { top: 35, right: 35, bottom: 35, left: 35 },
+              animated: false,
+            })
+          }
         >
-          <Marker
+          <MapView.Marker
             key={trail.id}
-            coordinate={{ latitude: trail.latitude, longitude: trail.longitude }}
+            coordinate={{
+              latitude: trail.latitude,
+              longitude: trail.longitude,
+            }}
             title={trail.name}
           />
-          <Marker
+          <MapView.Marker
             key={location.coords.latitude}
-            coordinate={ coords }
-            title={'You are here'}
+            coordinate={coords}
+            title={"You are here"}
           />
-          <MapViewDirections 
-            origin={ coords }
-            destination={{ latitude: trail.latitude, longitude: trail.longitude }}
-            apikey={ GOOGLE_DIRECTIONS_API_KEY }
+          <MapViewDirections
+            origin={coords}
+            destination={{
+              latitude: trail.latitude,
+              longitude: trail.longitude,
+            }}
+            apikey={GOOGLE_DIRECTIONS_API_KEY}
             strokeWidth={3}
             strokeColor="hotpink"
           />
-          <TouchableOpacity style={mapButton} onPress={openInMaps}>
-            <Text style={text}>Open in Maps</Text>
-          </TouchableOpacity>
         </MapView>
+        <TouchableOpacity style={mapButton} onPress={openInMaps}>
+          <Text style={text}>Open in Maps</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -114,8 +125,6 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#a7a7a7',
-    top: 8,
-    left: 16,
     fontSize: 14
   }
 });
