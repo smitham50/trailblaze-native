@@ -1,14 +1,20 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Trails from '../components/Trails';
 
 const SearchResultScreen = () => {
   return (
-    <View>
+    <View style={styles.trailsContainer}>
       <Trails />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  trailsContainer: {
+    alignItems: "center",
+  },
+});
 
 
 
