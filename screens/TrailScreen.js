@@ -100,7 +100,7 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     alignItems: "center"
   },
   mapContainer: {
